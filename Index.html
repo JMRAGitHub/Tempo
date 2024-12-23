@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Temporizadores</title>
+<style> 
+    audio { display: none; } 
+</style>
+</head>
+<body>
+
+<h1>Temporizadores</h1>
+<h2>
+<label for="input0">Entrada 0 (0-10):</label>
+<input type="number" id="input0" min="0" max="10" value="0"><br><br>
+
+<label for="input1">Entrada 1 (0-100):</label>
+<input type="number" id="input1" min="0" max="100" value="10"><br><br>
+
+<label for="input2">Entrada 2 (0-100):</label>
+<input type="number" id="input2" min="0" max="100" value="20"><br><br>
+
+<button id="button1">Empezar</button>
+
+    <audio id="miAudio" controls>
+        <source src="./tada.wav" type="audio/wav">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+
+
+    <div id="timer1Display">Timer 1: </div>
+    <div id="timer2Display">Timer 2: </div>
+    <div id="output"></div>
+</h2>
+
+<script>
+const button1 = document.getElementById('button1');
+let running = false;
+let SonidoOn = false;
+let timer1Interval;
+let timer2Interval;
+var audio = document.getElementById('miAudio');
+
+
+button1.addEventListener('click', async () => {
+  if (!running) {
+    running = true;
+    button1.textContent = 'Terminar';
+    await startProcess();
+  } else {
+    running = false;
+    clearTimeout(timer1Interval);
+    clearTimeout(timer2Interval);
+    document.getElementById('output').textContent = 'Terminado el trabajo';
+    beep(4); // Simula 4 pitidos
+  }
+});
+
+/* // Captura el evento 'play'
+ audio.addEventListener('play', function() {
+    console.log('SonidoOn = true');
+    SonidoOn = true;
+});
+
+// Captura el evento 'ended'
+audio.addEventListener('ended', function() {
+    console.log('SonidoOn = false');
+    SonidoOn = false;
+}); */
+
+
+async function startProcess() {
+  const input0 = parseInt(document.getElementById('input0').value);
+  const input1 = parseInt(document.getElementById('input1').value);
+  const input2 = parseInt(document.getElementById('input2').value);
+
+  for (let i = 0; i < 10; i++) {
+    await beep(audio); // Simula 2 pitidos
+  }
+
+  for (let i = 0; i < input0; i++) {
+    if (!running) return;
+  
+    await runTimer(input1, 'timer1Display');
+    await beep(audio); // Simula 2 pitidos
+
+    if (!running) return;
+    await runTimer(input2, 'timer2Display');
+    await beep(audio); // Simula 4 pitidos
+    if (!running) return;
+  }
+  document.getElementById('output').textContent = 'Terminado el trabajo';
+}
+
+function beep(audio) 
+{ return new Promise((resolve) => 
+  { audio.addEventListener('ended', resolve, { once: true }); 
+  audio.play(); 
+  }); 
+}
+
+/* async function beep(num) {
+  for (let i = 0; i < num; i++) {
+    if (!running) return;
+    SonidoOn = true;
+    //alert('Pitido');
+    //console.log('beep ' + i + '');
+    do {
+      console.log('beep ' + i + '');  
+      if (!running) return;
+      if (!SonidoOn) {
+          audio.play(); // Reproduce el audio automáticamente
+        } 
+    } while (SonidoOn);
+  }
+} */
+
+async function runTimer(seconds, displayId) {
+  let timeLeft = seconds;
+  const display = document.getElementById(displayId);
+
+  function updateTimer() {
+    if (!running) return;
+    display.textContent = `${displayId}: ${timeLeft}`;
+    if (timeLeft > 0) {
+      timeLeft--;
+      setTimeout(updateTimer, 1000);
+    } else {
+      display.textContent = `${displayId}: 0`;
+    }
+  }
+  updateTimer();
+  await new Promise(resolve => setTimeout(resolve, seconds * 1000)); //Espera a que termine el timer
+}
+</script>
+
+</body>
+</html>
