@@ -159,6 +159,7 @@ async function startProcess() {
     if (!running) return;
   }
   document.getElementById('output').textContent = 'Terminado el trabajo';
+  tiempo.textContent = "";
   await beep(audio3); // Sonido de fin de series de ejercicios
   inicializar();
 }
