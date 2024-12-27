@@ -122,15 +122,16 @@ function inicializar() {
 
 button1.addEventListener('click', async () => {
   if (!running) {
-    console.log("click en botón: " + button1.textContent);
+    //console.log("click en botón: " + button1.textContent);
     await beep(audio1); // Sonido de inicio de series de ejercicios
     inicializar();
     running = true;
     button1.textContent = 'Terminar';
     await startProcess();
   } else {
-    console.log("click en botón: " + button1.textContent);
+    //console.log("click en botón: " + button1.textContent);
     document.getElementById('output').textContent = 'Terminado el trabajo';
+    tiempo.textContent = "";
     await beep(audio3); // Sonido de fin de series de ejercicios
     inicializar();
   }
@@ -142,11 +143,11 @@ async function startProcess() {
   const input1 = parseInt(document.getElementById('input1').value);
   const input2 = parseInt(document.getElementById('input2').value);
   
-  console.log("startProcess antes del bucle");
+  //console.log("startProcess antes del bucle");
   for (let i = 1; i <= input0; i++) {
     if (!running) return;
     serie.textContent = "Serie: " + i
-    console.log("Serie: " + serie.textContent);
+    //console.log("Serie: " + serie.textContent);
     await beep(audio4); 
     tiempo.className = "rojo";
     await runTimer(input1, 'tiempo');
