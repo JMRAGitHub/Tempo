@@ -16,6 +16,20 @@ header {
 	font: normal 28px Arial;
 	letter-spacing: 2px;
 }
+.boton {
+  height: 100px; /* Alto del botón */
+  // width: 200px; /* Ancho del botón */
+  display: inline-block;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  vertical-align: middle;
+  font: bold 50px Arial;
+}
+.blanco {
+	background-color: rgb(255,255,255);
+	text-align: center;
+	color: rgb(255,255,255);
+	font: bold 50px Arial;
+}
 .rojo {
 	background-color: rgb(255,0,0);
 	text-align: center;
@@ -47,10 +61,14 @@ header {
   audio { display: none; } 
   input { font-size: 20px; }
   @media (max-width: 600px) { 
-    .centrado { width: 90%; } 
+    .centrado { // width: 90%; 
+                font-size: 14px; /* Tamaño de fuente para dispositivos pequeños */
+    } 
   } 
-  @media (min-width: 601px) { 
-    .centrado { width: 50%; } 
+  @media (max-width: 400px) { 
+    .centrado { // width: 50%; 
+                font-size: 12px; /* Tamaño de fuente para dispositivos muy pequeños */
+    } 
   } 
 
 </style>
@@ -85,13 +103,13 @@ header {
 <input type="number" id="input2" min="0" max="100" value="10"><br><br>
 </div>
 
-<button class="centrado" id="button1">Empezar</button>
+<button class="boton" id="button1" >Empezar</button>
 <br>
 <br>
 <div id="serie"></div>
 <br>
 <br>
-<div id="tiempo" class="rojo"></div>
+<div id="tiempo" class="blanco"></div>
 <br>
 <br>
 <div id="output"></div>
@@ -106,6 +124,10 @@ var audio4 = document.getElementById('miAudio4');
 let running = false;
 var serie = document.getElementById("serie");
 var tiempo = document.getElementById("tiempo");
+// Obtener el ancho de la pantalla 
+var screenWidth = window.screen.width; 
+// Obtener el alto de la pantalla 
+var screenHeight = window.screen.height; 
 //running = false;
 //button1.textContent = 'Empezar';
 //serie.textContent = "";
@@ -116,7 +138,10 @@ function inicializar() {
   button1.textContent = 'Empezar';
   serie.textContent = "";
   tiempo.textContent = "";
+  tiempo.className = "blanco";
   document.getElementById('output').textContent = '';
+  //console.log("Ancho de la pantalla: " + screenWidth + " píxeles"); 
+  //console.log("Alto de la pantalla: " + screenHeight + " píxeles");
 }
 
 
@@ -131,9 +156,8 @@ button1.addEventListener('click', async () => {
   } else {
     //console.log("click en botón: " + button1.textContent);
     document.getElementById('output').textContent = 'Terminado el trabajo';
-    tiempo.textContent = "";
-    await beep(audio3); // Sonido de fin de series de ejercicios
     inicializar();
+    await beep(audio3); // Sonido de fin de series de ejercicios
   }
 });
 
@@ -145,23 +169,22 @@ async function startProcess() {
   
   //console.log("startProcess antes del bucle");
   for (let i = 1; i <= input0; i++) {
-    if (!running) return;
+    if (!running) return; 
+    tiempo.className = "blanco";
     serie.textContent = "Serie: " + i
     //console.log("Serie: " + serie.textContent);
-    await beep(audio4); 
     tiempo.className = "rojo";
+    await beep(audio4); 
     await runTimer(input1, 'tiempo');
-    
     if (!running) return;
-    await beep(audio2); 
+    await beep(audio2);
     tiempo.className = "verde";
     await runTimer(input2, 'tiempo');
     if (!running) return;
   }
   document.getElementById('output').textContent = 'Terminado el trabajo';
-  tiempo.textContent = "";
-  await beep(audio3); // Sonido de fin de series de ejercicios
   inicializar();
+  await beep(audio3); // Sonido de fin de series de ejercicios
 }
 
 function beep(audio) 
@@ -177,10 +200,10 @@ async function runTimer(seconds, displayId) {
   const display = document.getElementById(displayId);
 
   function updateTimer() {
-    if (!running) return;
     display.textContent = `${timeLeft}`;
     if (timeLeft > 0) {
       timeLeft--;
+      if (!running) return;
       setTimeout(updateTimer, 1000);
     } else {
       display.textContent = `0`;
