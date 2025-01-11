@@ -20,7 +20,7 @@ header {
 .boton {
   height: 100px; /* Alto del botón */
   // width: 200px; /* Ancho del botón */
-  display: inline-block;
+  display: inline-block; /* Permite que el ancho del botón se ajuste al texto que muestra */
   white-space: nowrap; /* Evita que el texto se divida en varias líneas */
   vertical-align: middle;
   font: bold 50px Arial;
@@ -73,7 +73,7 @@ header {
   } 
   @media (max-width: 400px) { 
     .centrado { 
-      width: 50%; 
+      width: 90%; 
       font-size: calc(5vw + 5vh);
     } 
   } 
@@ -114,12 +114,9 @@ header {
 <div class="centrado">
 <button class="boton" id="button1" >Empezar</button>
 <br>
-<br>
 <div id="serie"></div>
 <br>
-<br>
 <div id="tiempo" class="blanco"></div>
-<br>
 <br>
 <div id="output"></div>
 </div>
