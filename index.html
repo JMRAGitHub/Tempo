@@ -56,9 +56,7 @@ header {
   } 
   .centrado { 
       text-align: center; 
-      // padding: 20px; 
-      // background-color: #f0f0f0; 
-      // border: 1px solid #ccc; 
+      font-size: calc(2vw + 2vh);
   } 
   .wrapper {
 	margin-top: 100px;
@@ -66,6 +64,7 @@ header {
   }
   audio { display: none; } 
   input { font-size: calc(2vw + 2vh); }
+ 
   @media (max-width: 600px) { 
     .centrado { // width: 90%; 
       font-size: calc(2vw + 2vh);
@@ -73,9 +72,10 @@ header {
   } 
   @media (max-width: 400px) { 
     .centrado { // width: 50%; 
-      font-size: calc(2vw + 2vh);
+      font-size: calc(10vw + 10vh);
     } 
   } 
+
 
 </style>
 </head>
@@ -109,6 +109,7 @@ header {
 <input type="number" id="input2" min="0" max="100" value="10"><br><br>
 </div>
 
+<div class="centrado">
 <button class="boton" id="button1" >Empezar</button>
 <br>
 <br>
@@ -119,6 +120,7 @@ header {
 <br>
 <br>
 <div id="output"></div>
+</div>
 </h2>
 
 <script>
