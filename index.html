@@ -14,6 +14,7 @@ header {
 	color: rgb(255,255,255);
 	text-shadow: 2px 2px 1px rgba(255,255,255,.5);
 	font: normal 28px Arial;
+  font-size: calc(2vw + 2vh);
 	letter-spacing: 2px;
 }
 .boton {
@@ -23,31 +24,35 @@ header {
   white-space: nowrap; /* Evita que el texto se divida en varias líneas */
   vertical-align: middle;
   font: bold 50px Arial;
+  font-size: calc(2vw + 2vh);
 }
 .blanco {
 	background-color: rgb(255,255,255);
 	text-align: center;
 	color: rgb(255,255,255);
 	font: bold 50px Arial;
+  font-size: calc(2vw + 2vh);
 }
 .rojo {
 	background-color: rgb(255,0,0);
 	text-align: center;
 	color: rgb(255,255,255);
 	font: bold 50px Arial;
+  font-size: calc(2vw + 2vh);
 }
 .verde {
 	background-color: rgb(0,255,0);
 	text-align: center;
 	color: rgb(255,255,255);
 	font: bold 50px Arial;
+  font-size: calc(2vw + 2vh);
 }
   body, html { 
       height: 100%; 
       margin: 0; 
       display: flex; 
       justify-content: center; 
-      //align-items: center; 
+      align-items: center; 
   } 
   .centrado { 
       text-align: center; 
@@ -57,17 +62,18 @@ header {
   } 
   .wrapper {
 	margin-top: 100px;
+  font-size: calc(2vw + 2vh);
   }
   audio { display: none; } 
-  input { font-size: 20px; }
+  input { font-size: calc(2vw + 2vh); }
   @media (max-width: 600px) { 
     .centrado { // width: 90%; 
-                font-size: 14px; /* Tamaño de fuente para dispositivos pequeños */
+      font-size: calc(2vw + 2vh);
     } 
   } 
   @media (max-width: 400px) { 
     .centrado { // width: 50%; 
-                font-size: 120px; /* Tamaño de fuente para dispositivos muy pequeños */
+      font-size: calc(2vw + 2vh);
     } 
   } 
 
