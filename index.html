@@ -31,21 +31,21 @@ header {
 	text-align: center;
 	color: rgb(255,255,255);
 	font: bold 50px Arial;
-  font-size: calc(2vw + 2vh);
+  font-size: calc(2vw + 4vh);
 }
 .rojo {
 	background-color: rgb(255,0,0);
 	text-align: center;
 	color: rgb(255,255,255);
 	font: bold 50px Arial;
-  font-size: calc(2vw + 2vh);
+  font-size: calc(2vw + 4vh);
 }
 .verde {
 	background-color: rgb(0,255,0);
 	text-align: center;
-	color: rgb(255,255,255);
+	color: rgb(0,0,0);
 	font: bold 50px Arial;
-  font-size: calc(2vw + 2vh);
+  font-size: calc(2vw + 4vh);
 }
   body, html { 
       height: 100%; 
@@ -99,6 +99,7 @@ header {
 <div class="centrado">
 <br>
 <button class="boton" id="button1" >Empezar</button>
+<br>
 <div id="serie"></div>
 <div id="tiempo" class="blanco"></div>
 <div id="output"></div>
@@ -106,19 +107,19 @@ header {
 </h2>
 
 <audio id="miAudio1" controls>
-  <source src="./Ring08.wav" type="audio/wav">
-  Tu navegador no soporta el elemento de audio.
-</audio>
-<audio id="miAudio2" controls>
-  <source src="./tada.wav" type="audio/wav">
+  <source src="./Audio1.wav" type="audio/wav">
   Tu navegador no soporta el elemento de audio.
 </audio>
 <audio id="miAudio3" controls>
-  <source src="./Ring05.wav" type="audio/wav">
+  <source src="./Audio3.wav" type="audio/wav">
+  Tu navegador no soporta el elemento de audio.
+</audio>
+<audio id="miAudio2" controls>
+  <source src="./Audio2.wav" type="audio/wav">
   Tu navegador no soporta el elemento de audio.
 </audio>
 <audio id="miAudio4" controls>
-  <source src="Windows Logon.wav" type="audio/wav">
+  <source src="./Audio4.wav" type="audio/wav">
   Tu navegador no soporta el elemento de audio.
 </audio>
 
@@ -164,7 +165,7 @@ button1.addEventListener('click', async () => {
     //console.log("click en botón: " + button1.textContent);
     document.getElementById('output').textContent = 'Terminado el trabajo';
     inicializar();
-    await beep(audio3); // Sonido de fin de series de ejercicios
+    await beep(audio4); // Sonido de fin de series de ejercicios
   }
 });
 
@@ -181,17 +182,17 @@ async function startProcess() {
     serie.textContent = "Serie: " + i
     //console.log("Serie: " + serie.textContent);
     tiempo.className = "rojo";
-    await beep(audio4); 
+    await beep(audio2); 
     await runTimer(input1, 'tiempo');
     if (!running) return;
-    await beep(audio2);
+    await beep(audio3);
     tiempo.className = "verde";
     await runTimer(input2, 'tiempo');
     if (!running) return;
   }
   document.getElementById('output').textContent = 'Terminado el trabajo';
   inicializar();
-  await beep(audio3); // Sonido de fin de series de ejercicios
+  await beep(audio4); // Sonido de fin de series de ejercicios
 }
 
 function beep(audio) 
